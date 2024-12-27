@@ -1,0 +1,23 @@
+import os
+import keyboard
+
+# משתנה לזכור אם המיקרופון מושתק
+is_muted = False
+
+def toggle_mic():
+    global is_muted
+    if is_muted:
+        # פקודה להפעיל את המיקרופון
+        os.system("nircmd.exe mutesysvolume 0 microphone")
+        print("המיקרופון הופעל")
+    else:
+        # פקודה להשתיק את המיקרופון
+        os.system("nircmd.exe mutesysvolume 1 microphone")
+        print("המיקרופון הושתק")
+    is_muted = not is_muted
+
+# האזנה ללחיצה על מקש 'Z'
+keyboard.add_hotkey('Z', toggle_mic)
+
+print("התוכנית פועלת. לחץ על Z כדי להשתיק או להפעיל את המיקרופון.")
+keyboard.wait('esc')  # המתן עד לחיצה על ESC כדי לצאת
